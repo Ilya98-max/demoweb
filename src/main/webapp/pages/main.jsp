@@ -1,78 +1,93 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Main</title>
+    <title>Main Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        form {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
+        .menu-btn {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .make-order-btn {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #008CBA;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            background-color: #f0ad4e;
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
-
         .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background-color: #f44336;
+            background-color: #5cb85c;
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
-
-        .payment-methods-btn {
+        .upload-form {
             position: absolute;
-            top: 60px;
-            left: 10px; /* Изменено с right на left */
-            background-color: #FFA500;
-            color: white;
-            padding: 10px 20px;
+            bottom: 10px;
+            left: 10px;
+        }
+        .upload-btn {
+            padding: 5px 10px;
             border: none;
             border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            background-color: #d9534f;
+            color: white;
             cursor: pointer;
         }
-
-        hr {
-            display: none;
+        #current-time {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<button class="make-order-btn" onclick="location.href='order-form.html'">Make Order</button>
-<button class="payment-methods-btn" onclick="location.href='payment-methods.html'">Payment Methods</button>
+<div style="text-align: center;">
+    <p style="font-size: 28px;">The best coffee in town. Fresh and delicious pastries</p>
+</div>
+
+<h1>Menu Page</h1>
+<div>
+    <button class="menu-btn" onclick="redirectToOrderPage()">Menu Page</button>
+</div>
+
 <form action="db-servlet">
     <input type="hidden" name="command" value="logout"/>
-    <input type="submit" class="logout-btn" value="logOut"/>
+    <input type="submit" class="logout-btn" value="Logout"/>
 </form>
+
+<form class="upload-form" action="db-servlet" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="command" value="upload_photo"/>
+    <input type="file" name="photo" accept="image/*"/>
+    <input type="submit" class="upload-btn" value="Upload Photo"/>
+</form>
+
+<script>
+    function redirectToOrderPage() {
+        window.location.href = 'pages/order-page.jsp';
+    }
+</script>
 </body>
 </html>
+
+
+
+
+

@@ -1,12 +1,14 @@
 package com.example.demo.command.impl;
 
 import com.example.demo.command.Command;
+import com.example.demo.entity.Order;
 import com.example.demo.entity.User;
 import com.example.demo.exception.CommandException;
 import com.example.demo.exception.DaoException;
 import com.example.demo.exception.ServiceException;
 import com.example.demo.service.UserService;
 import com.example.demo.service.impl.UserServiceImpl;
+import dao.impl.OrderDaoImpl;
 import dao.impl.UserDaoImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ public class LoginCommand implements Command {
                 request.setAttribute("user", login);
                 session.setAttribute("user_name", login);
                 if (userService.isAdmin(login)) {
+                    // Получаем всех пользователей
                     List<User> allUsers;
                     try {
                         allUsers = UserDaoImpl.getInstance().findAll();
@@ -33,6 +36,16 @@ public class LoginCommand implements Command {
                         throw new RuntimeException(e);
                     }
                     request.setAttribute("users", allUsers);
+
+                    // Получаем все заказы
+                    List<Order> allOrders;
+                    try {
+                        allOrders = OrderDaoImpl.getInstance().findAll();
+                    } catch (DaoException e) {
+                        throw new RuntimeException(e);
+                    }
+                    request.setAttribute("orders", allOrders);
+
                     page = "pages/user_data.jsp";
                 } else {
                     page = "pages/main.jsp";

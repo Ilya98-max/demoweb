@@ -53,15 +53,16 @@
 </head>
 <body>
 <h2>Add User Form</h2>
-<form action="db-servlet" method="GET">
-    <input type="hidden" name="command" value="add_user"/>
+<form action="db-servlet" method="POST">
+    <input type="hidden" name="command" value="add_user" autocomplete="off"/>
     <label for="phone_number">Phone Number:</label>
-    <input type="text" id="phone_number" name="phone_number">
-    <div class="error-message">Invalid phone number format.</div>
+    <input type="text" id="phone_number" name="phone_number" autocomplete="off">
     <label for="last_name">Last Name:</label>
-    <input type="text" id="last_name" name="last_name">
+    <input type="text" id="last_name" name="last_name" autocomplete="off">
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
+    <input type="password" id="password" name="password" autocomplete="off">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" autocomplete="off">
     <input type="submit" name="sub" value="Add User">
 </form>
 </body>

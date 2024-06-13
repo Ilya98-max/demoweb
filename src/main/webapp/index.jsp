@@ -12,7 +12,7 @@
       background-color: #f5f5f5;
     }
     header {
-      background-color: #007bff;
+      background-color:#8b00ff ;
       color: #fff;
       text-align: center;
       padding: 20px 0;
@@ -49,7 +49,7 @@
   </style>
 </head>
 <body>
-<header><h1>Welcome to our application</h1></header>
+<header><h1>Coffee house</h1></header>
 <main>
   <h2><a href="login-form.html">Login Form</a></h2>
   <h2><a href="add-user-form.html">Add User Form</a></h2>

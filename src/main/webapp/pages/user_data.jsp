@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>user_data</title>
+    <title>User Data</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,29 +33,52 @@
 </head>
 <body>
 
+<h1>User Data</h1>
+
 <table>
     <thead>
     <tr>
         <th>Phone Number</th>
         <th>Last Name</th>
         <th>Password</th>
+        <th>Email</th>
     </tr>
     </thead>
     <tbody>
-
     <c:forEach var="user" items="${users}">
         <tr>
             <td>${user.phoneNumber}</td>
             <td>${user.lastName}</td>
             <td>${user.password}</td>
+            <td>${user.email}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<form action="db-servlet" method="GET">
-    <input type="hidden" name="command" value="back"/>
-    <input type="submit" value="Back"/>
-</form>
+
+
+<h2>Orders</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Coffee Type</th>
+        <th>Coffee Quantity</th>
+        <th>Dessert Type</th>
+        <th>Dessert Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="order" items="${orders}">
+        <tr>
+            <td>${order.coffeeType}</td>
+            <td>${order.coffeeQuantity}</td>
+            <td>${order.dessertType}</td>
+            <td>${order.dessertQuantity}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
+
 </body>
 </html>
-

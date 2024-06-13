@@ -5,6 +5,7 @@ import com.example.demo.exception.DaoException;
 import com.example.demo.pool.ConnectionPool;
 import dao.BaseDao;
 import dao.UserDao;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,16 +14,13 @@ import java.util.List;
 public class UserDaoImpl extends BaseDao<User> implements UserDao {
     private static final String SELECT_LOGIN_PASSWORD = "SELECT password FROM phone_book  WHERE last_name = ?";
 
-    private static final String INSERT_USER = "INSERT INTO phone_book (phone_number, last_name, password) VALUES (?, ?, ?)";
+    private static final String INSERT_USER = "INSERT INTO phone_book (phone_number, last_name, password,email) VALUES (?, ?, ?,?)";
 
-    private static final String SELECT_USER_BY_LAST_NAME = "SELECT phone_number, last_name, password FROM phone_book WHERE last_name = ?";
+    private static final String SELECT_USER_BY_LAST_NAME = "SELECT phone_number, last_name, password ,email FROM phone_book WHERE last_name = ?";
 
-    private static final String SELECT_ALL_USERS = "SELECT phone_number, last_name, password FROM phone_book";
+    private static final String SELECT_ALL_USERS = "SELECT phone_number, last_name, password,email FROM phone_book";
 
     private static final String SELECT_ROLE_BY_LAST_NAME = "SELECT role FROM phone_book WHERE last_name = ?";
-
-
-
 
     private static UserDaoImpl instance = new UserDaoImpl();
 
@@ -40,9 +38,17 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_USER)) {
+
+            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+
+
+
             statement.setString(1, user.getPhoneNumber());
             statement.setString(2, user.getLastName());
-            statement.setString(3, user.getPassword());
+            // statement.setString(3, user.getPassword());
+            statement.setString(3, hashedPassword);
+            statement.setString(4, user.getEmail());
+
 
             int rowsAffected = statement.executeUpdate();
             added = rowsAffected > 0;
@@ -71,14 +77,15 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
                 User user = new User(
                         resultSet.getString("phone_number"),
                         resultSet.getString("last_name"),
-                        resultSet.getString("password")
+                        resultSet.getString("password"),
+                        resultSet.getString("email")
+
                 );
                 userList.add(user);
             }
         } catch (SQLException e) {
             throw new DaoException("Error while finding all users", e);
         }
-
         return userList;
     }
 
@@ -120,7 +127,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
                 user = new User(
                         resultSet.getString("phone_number"),
                         resultSet.getString("last_name"),
-                        resultSet.getString("password")
+                        resultSet.getString("password"),
+                        resultSet.getString("email")
                 );
             }
         } catch (SQLException e) {
@@ -152,6 +160,5 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
         return isAdmin;
     }
 
-
-
 }
+

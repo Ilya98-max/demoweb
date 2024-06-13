@@ -39,7 +39,7 @@
 </head>
 <body>
 <h1>You have not filled in all fields in the form</h1>
-<form action="db-servlet" method="GET">
+<form action="db-servlet" method="POST">
     <input type="hidden" name="command" value="back"/>
     <input type="submit" value="Back"/>
 </form>

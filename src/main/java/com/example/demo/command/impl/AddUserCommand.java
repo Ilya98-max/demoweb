@@ -5,6 +5,7 @@ import com.example.demo.entity.User;
 import com.example.demo.exception.CommandException;
 import com.example.demo.exception.ServiceException;
 import com.example.demo.service.impl.UserServiceImpl;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,10 +16,12 @@ public class AddUserCommand implements Command {
         String phoneNumber = request.getParameter("phone_number");
         String lastName = request.getParameter("last_name");
         String password = request.getParameter("password");
+        String email = request.getParameter("email");
 
 
-        if (phoneNumber == null || lastName == null || password == null ||
-                phoneNumber.isEmpty() || lastName.isEmpty() || password.isEmpty()) {
+
+        if (phoneNumber == null || lastName == null || password == null ||  email == null ||
+                phoneNumber.isEmpty() || lastName.isEmpty() || password.isEmpty() || email.isEmpty()) {
             return "pages/fields.jsp";
         }
 
@@ -34,8 +37,9 @@ public class AddUserCommand implements Command {
             throw new RuntimeException(e);
         }
 
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        User newUser = new User(phoneNumber, lastName, password);
+        User newUser = new User(phoneNumber, lastName, hashedPassword,email);
 
 
         boolean added = UserServiceImpl.getInstance().add(newUser);

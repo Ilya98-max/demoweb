@@ -39,7 +39,7 @@
 </head>
 <body>
 <h1>A user with the same name already exists</h1>
-<form action="db-servlet" method="GET">
+<form action="db-servlet" method="POST">
     <input type="hidden" name="command" value="back"/>
     <input type="submit" value="Back"/>
 </form>

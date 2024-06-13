@@ -9,7 +9,6 @@ public interface UserService {
 
      boolean authenticate (String login , String password ) throws ServiceException;
 
-
      boolean add(User user);
 
      User getUserByLastName(String lastName) throws ServiceException;

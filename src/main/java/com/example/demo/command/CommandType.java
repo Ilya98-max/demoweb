@@ -7,7 +7,10 @@ public enum CommandType {
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     BACK(new BackCommand()),
+    PLACE_ORDER(new PlaceOrderCommand()),
+    UPLOAD_PHOTO(new UploadPhotoCommand()),
     DEFAULT (new DefaultCommand());
+
 
 
     Command command ;

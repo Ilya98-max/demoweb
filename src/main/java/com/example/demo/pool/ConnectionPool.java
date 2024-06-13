@@ -26,6 +26,7 @@ public class ConnectionPool {
     }
 
 
+
     private ConnectionPool() {
         String url = "jdbc:postgresql://localhost:5432/java_task1";
         Properties prop = new Properties();

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.command.Command;
 import com.example.demo.command.CommandType;
 import com.example.demo.exception.CommandException;
+import com.example.demo.exception.ServiceException;
 import com.example.demo.pool.ConnectionPool;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "dbServlet", urlPatterns= {"/db-servlet", "*.do"})
+@WebServlet(name = "dbServlet", urlPatterns= {"/db-servlet", "/pages/db-servlet"})
 public class DBServlet extends HttpServlet {
     public void init() {
 
@@ -27,18 +28,21 @@ public class DBServlet extends HttpServlet {
         try {
             page = command.execute(request);
             request.getRequestDispatcher(page).forward(request,response );
-           // response.sendRedirect( page);
+            // response.sendRedirect( page);
         } catch (CommandException e) {
-          //response.sendError(500);//1
+            //response.sendError(500);//1
             //throw new ServletException(e);//2
             request.setAttribute("error_msg",e.getCause());//3
             request.getRequestDispatcher("pages/error/error_500.jsp").forward(request,response );
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
         }
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
 
     }
 
@@ -46,3 +50,4 @@ public class DBServlet extends HttpServlet {
         ConnectionPool.getInstance().destroyPool();
     }
 }
+

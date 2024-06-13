@@ -1,30 +1,56 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Successful</title>
+    <meta charset="UTF-8">
+    <title>Menu Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            color: #333;
+        .menu-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
             text-align: center;
-            margin-top: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            margin-left: 10px; /* Уменьшенный отступ слева */
+            background-color: #f0ad4e;
+            color: white;
+            cursor: pointer;
+        }
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+<h1>Menu Page</h1>
+<div>
+    <button class="menu-btn" onclick="redirectToOrderPage()">Menu Page</button>
+</div>
 
-<h1>Users Successfully Added</h1>
-
-<form action="db-servlet" method="GET">
-    <input type="hidden" name="command" value="back"/>
-    <input type="submit" value="Back"/>
+<form action="db-servlet">
+    <input type="hidden" name="command" value="logout"/>
+    <input type="submit" class="logout-btn" value="Logout"/>
 </form>
 
+<script>
+    function redirectToOrderPage() {
+        window.location.href = 'pages/order-page.jsp';
+    }
+</script>
 </body>
 </html>
