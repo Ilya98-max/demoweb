@@ -47,7 +47,7 @@ public class AddUserCommand implements Command {
         if (added) {
             return "pages/successful.jsp";
         } else {
-            return "pages/unsuccessful.jsp";
+            return "pages/account.jsp";
         }
     }
 }

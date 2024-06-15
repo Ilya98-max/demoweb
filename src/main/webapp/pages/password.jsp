@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Delete Account</title>
+    <title>Update Password</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -57,8 +57,8 @@
 </head>
 <body>
 <div class="container">
-    <h1>Delete Account</h1>
-    <p>To delete your account, please enter the username you used for registration.</p>
+    <h1>Update Password</h1>
+    <p>To update your password, please enter the username you used for registration.</p>
     <p>Make sure you enter the correct username.</p>
     <p>If you continue to experience issues, please contact support.</p>
     <br>

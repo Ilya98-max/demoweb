@@ -1,69 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User Form</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Georgia', serif;
+            background-color: #fdf5e6;
+            color: #3e2723;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        h2 {
-            color: #333;
-            text-align: center;
-        }
-        form {
+        .container {
             background-color: #fff;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
             width: 300px;
-            margin: 20px auto;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #6f4e37;
         }
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            color: #6f4e37;
+            font-weight: bold;
+            text-align: left;
         }
         input[type="text"],
         input[type="password"],
         input[type="submit"] {
-            width: calc(100% - 12px);
+            width: calc(100% - 22px);
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 5px;
             box-sizing: border-box;
+            font-size: 16px;
         }
         input[type="submit"] {
-            background-color: #4caf50;
+            background-color: #8d6e63;
             color: white;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: bold;
+            border: none;
         }
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #a1887f;
+            transform: scale(1.05);
         }
         .error-message {
             color: red;
             font-size: 12px;
             margin-top: 5px;
+            text-align: left;
+        }
+        /* Tooltip style */
+        input[type="text"]:hover::before {
+            content: attr(title);
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 1000;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            border: 1px solid #fff;
         }
     </style>
 </head>
 <body>
-<h2>Add User Form</h2>
-<form action="db-servlet" method="POST">
-    <input type="hidden" name="command" value="add_user" autocomplete="off"/>
-    <label for="phone_number">Phone Number:</label>
-    <input type="text" id="phone_number" name="phone_number" autocomplete="off">
-    <label for="last_name">Last Name:</label>
-    <input type="text" id="last_name" name="last_name" autocomplete="off">
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" autocomplete="off">
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" autocomplete="off">
-    <input type="submit" name="sub" value="Add User">
-</form>
+<div class="container">
+    <h2>Add User</h2>
+    <form action="db-servlet" method="POST">
+        <input type="hidden" name="command" value="add_user" autocomplete="off"/>
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" autocomplete="off" title="Phone number must be 11 digits including +">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" autocomplete="off">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" autocomplete="off">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" autocomplete="off">
+        <input type="submit" name="sub" value="Add User">
+    </form>
+</div>
 </body>
 </html>

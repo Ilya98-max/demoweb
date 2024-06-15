@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "dbServlet", urlPatterns= {"/db-servlet", "/pages/db-servlet"})
+@WebServlet(name = "dbServlet", urlPatterns = {"/db-servlet", "/pages/db-servlet"})
 public class DBServlet extends HttpServlet {
+
     public void init() {
 
     }
@@ -23,31 +24,25 @@ public class DBServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
         String commandStr = request.getParameter("command");
-        Command command   = CommandType.define(commandStr);
-        String page ;
+        Command command;
         try {
-            page = command.execute(request);
-            request.getRequestDispatcher(page).forward(request,response );
-            // response.sendRedirect( page);
+            command = CommandType.define(commandStr, request.getLocale());
+            String page = command.execute(request);
+            request.getRequestDispatcher(page).forward(request, response);
         } catch (CommandException e) {
-            //response.sendError(500);//1
-            //throw new ServletException(e);//2
-            request.setAttribute("error_msg",e.getCause());//3
-            request.getRequestDispatcher("pages/error/error_500.jsp").forward(request,response );
+            request.setAttribute("error_msg", e.getCause());
+            request.getRequestDispatcher("/pages/error/error_500.jsp").forward(request, response);
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-
     }
 
-    public void destroy(){
+    public void destroy() {
         ConnectionPool.getInstance().destroyPool();
     }
 }
-

@@ -1,14 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-
 <html>
 <head>
     <title>Users</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #721c24;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            color: #6c757d;
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,22 +16,28 @@
             height: 100vh;
         }
         h1 {
-            font-size: 24px;
+            font-size: 32px;
             text-align: center;
+            color: #4e342e;
         }
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 20px;
         }
         input[type="submit"] {
-            background-color: #007bff;
+            background-color: #795548;
             color: #ffffff;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
             text-decoration: none;
             margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #6d4c41;
         }
     </style>
 </head>

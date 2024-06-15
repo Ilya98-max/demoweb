@@ -17,5 +17,10 @@ public interface UserService {
 
      boolean isAdmin(String login) throws ServiceException;
 
+     boolean deleteAccountByUsername(String username) throws ServiceException;
+
+     boolean changePasswordByUsername(String username, String newPassword) throws ServiceException;
+
+
 }
 

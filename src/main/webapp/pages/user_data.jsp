@@ -6,28 +6,53 @@
     <title>User Data</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2e9e4;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h1 {
-            color: #333;
+            color: #3e2723;
             text-align: center;
-            margin-top: 50px;
+            margin: 50px 0 20px;
+            font-size: 32px;
         }
         table {
             border-collapse: collapse;
             width: 80%;
             margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+            border: 1px solid #d7ccc8;
+            padding: 12px;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #5d4037;
+            color: #fff;
+            border-color: #5d4037;
+        }
+        td {
+            color: #5d4037;
+        }
+        a {
+            font-family: 'Rock Salt', cursive;
+            font-size: 18px;
+            color: #3e2723;
+            text-decoration: none;
+            background-color: #f9fbe7;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #ffee58;
         }
     </style>
 </head>
@@ -79,6 +104,9 @@
     </tbody>
 </table>
 
+<p style="text-align: center;">
+    <a href="index.jsp">Go back to homepage</a>
+</p>
 
 </body>
 </html>

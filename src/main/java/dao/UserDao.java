@@ -17,5 +17,10 @@ public interface UserDao {
 
     boolean isAdmin(String login) throws DaoException;
 
+    boolean deleteByUsername(String username) throws DaoException;
+
+    boolean changePasswordByUsername(String username, String newPassword) throws DaoException;
+
+
 
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Delete Account</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,14 +17,14 @@
             height: 100vh;
         }
 
-        form {
-            text-align: center;
+        .form-container {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 90%;
+            text-align: center;
         }
 
         h2 {
@@ -40,17 +40,16 @@
             color: #6b4e37;
         }
 
-        input[type="text"], input[type="password"], input[type="submit"] {
-            padding: 12px;
-            margin: 8px 0;
-            width: calc(100% - 24px); /* Subtracting 24px to account for padding and margin */
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            margin: 5px;
+            width: calc(100% - 22px); /* Subtracting 22px to account for padding and margin */
             box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 16px;
         }
 
-        input[type="text"]:focus, input[type="password"]:focus {
+        input[type="text"]:focus {
             outline-color: #6b4e37;
         }
 
@@ -60,7 +59,10 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            padding: 12px;
             font-size: 18px;
+            width: 100%;
+            border-radius: 4px;
         }
 
         input[type="submit"]:hover {
@@ -70,15 +72,15 @@
 </head>
 <body>
 
-<form action="db-servlet" method="POST">
-    <input type="hidden" name="command" value="login">
-    <h2>Login</h2>
-    <label for="login">Login</label>
-    <input type="text" id="login" name="login" placeholder="Enter Login" required>
-    <label for="pass">Password</label>
-    <input type="password" id="pass" name="pass" placeholder="Enter Password" required>
-    <input type="submit" name="sub" value="Login">
-</form>
+<div class="form-container">
+    <form action="db-servlet" method="POST">
+        <input type="hidden" name="command" value="delete_account" autocomplete="off">
+        <h2>Delete User Account</h2>
+        <label for="username">Username (Last Name)</label><br>
+        <input type="text" id="username" name="username" placeholder="Enter Username" required><br><br>
+        <input type="submit" name="sub" value="Delete Account">
+    </form>
+</div>
 
 </body>
 </html>

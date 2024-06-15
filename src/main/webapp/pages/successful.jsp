@@ -1,56 +1,128 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="custom" uri="/WEB-INF/tags/tags.tld" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Menu Page</title>
+    <title>Main Page</title>
     <style>
-        .menu-btn {
-            padding: 10px 20px;
+        body {
+            background-color: #fdf5e6;
+            color: #3e2723;
+            font-family: 'Georgia', serif;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .header, .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #6f4e37;
+            color: white;
+            border-bottom: 2px solid #4d3319;
+            width: 100%;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .header-content {
+            margin-bottom: 20px;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .menu-btn, .logout-btn {
+            padding: 12px 24px;
             border: none;
             border-radius: 5px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin-bottom: 10px;
-            margin-left: 10px; /* Уменьшенный отступ слева */
-            background-color: #f0ad4e;
-            color: white;
+            margin: 10px 0;
             cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #8d6e63;
+            color: white;
+            outline: none;
+        }
+        .menu-btn:hover {
+            background-color: #9c7e71;
         }
         .logout-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-bottom: 10px;
+            background-color: #6f4e37;
+            color: white;
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background-color: #5cb85c;
+        }
+        .logout-btn:hover {
+            background-color: #8d6e63;
+        }
+        #current-time {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer {
+            background-color: #6f4e37;
             color: white;
-            cursor: pointer;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: #9c7e71;
         }
     </style>
+    <script>
+        function redirectToOrderPage() {
+            window.location.href = 'pages/order-page.jsp';
+        }
+    </script>
 </head>
 <body>
-<h1>Menu Page</h1>
-<div>
-    <button class="menu-btn" onclick="redirectToOrderPage()">Menu Page</button>
+<div class="header">
+    <div class="header-content">
+        <h1>The Best Coffee in Town</h1>
+        <p>Fresh and Delicious Pastries</p>
+    </div>
 </div>
-
-<form action="db-servlet">
-    <input type="hidden" name="command" value="logout"/>
-    <input type="submit" class="logout-btn" value="Logout"/>
-</form>
-
-<script>
-    function redirectToOrderPage() {
-        window.location.href = 'pages/order-page.jsp';
-    }
-</script>
+<div class="container">
+    <div class="content">
+        <button class="menu-btn" onclick="redirectToOrderPage()">Menu Page</button>
+        <form action="db-servlet" style="display:inline;">
+            <input type="hidden" name="command" value="logout"/>
+            <input type="submit" class="logout-btn" value="Logout"/>
+        </form>
+    </div>
+</div>
+<custom:customTag/>
+<div class="footer">
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact Us</a>
+    <p>&copy; 2024 The Coffee House </p>
+</div>
 </body>
 </html>

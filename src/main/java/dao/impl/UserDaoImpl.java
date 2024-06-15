@@ -22,6 +22,11 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
     private static final String SELECT_ROLE_BY_LAST_NAME = "SELECT role FROM phone_book WHERE last_name = ?";
 
+    private static final String DELETE_BY_USERNAME = "DELETE FROM phone_book WHERE last_name = ?";
+
+    private static final String UPDATE_PASSWORD_BY_USERNAME = "UPDATE phone_book SET password = ? WHERE last_name = ?";
+
+
     private static UserDaoImpl instance = new UserDaoImpl();
 
     private UserDaoImpl() {
@@ -39,14 +44,10 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_USER)) {
 
-            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-
-
-
             statement.setString(1, user.getPhoneNumber());
             statement.setString(2, user.getLastName());
             // statement.setString(3, user.getPassword());
-            statement.setString(3, hashedPassword);
+            statement.setString(3, user.getPassword());
             statement.setString(4, user.getEmail());
 
 
@@ -106,7 +107,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
             if (resultSet.next()) {
                 passFromDB = resultSet.getString(1);
-                match = password.equals(passFromDB);
+                match = BCrypt.checkpw(password, passFromDB);
+
             }
 
         } catch (SQLException e) {
@@ -115,6 +117,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
         return match;
     }
+
+
 
     @Override
     public User getUserByLastName(String lastName) throws DaoException {
@@ -159,6 +163,39 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
         return isAdmin;
     }
+
+    @Override
+    public boolean deleteByUsername(String username) throws DaoException {
+        boolean deleted = false;
+
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_BY_USERNAME)) {
+
+            statement.setString(1, username);
+            int rowsAffected = statement.executeUpdate();
+            deleted = rowsAffected > 0;
+
+        } catch (SQLException throwables) {
+            throw new DaoException("Error deleting user by username", throwables);
+        }
+
+        return deleted;
+    }
+    public boolean changePasswordByUsername(String username, String hashedPassword) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PASSWORD_BY_USERNAME)) {
+
+            statement.setString(1, hashedPassword);
+            statement.setString(2, username);
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            throw new DaoException("Error changing password for username: " + username, e);
+        }
+    }
+
 
 }
 

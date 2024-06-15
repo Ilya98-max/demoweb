@@ -73,4 +73,29 @@ public class UserServiceImpl implements UserService {
         }
         return isAdmin;
     }
+
+    @Override
+    public boolean deleteAccountByUsername(String username) throws ServiceException {
+        UserDao userDao = UserDaoImpl.getInstance();
+        boolean deleted = false;
+        try {
+
+            deleted = userDao.deleteByUsername(username);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to delete account by username", e);
+        }
+        return deleted;
+    }
+    @Override
+    public boolean changePasswordByUsername(String username, String newPassword) throws ServiceException {
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.changePasswordByUsername(username, newPassword);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to change password", e);
+        }
+    }
+
+
+
 }
