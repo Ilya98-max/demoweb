@@ -30,4 +30,14 @@
     <welcome-file-list>
         <welcome-file>order_page.jsp</welcome-file>
     </welcome-file-list>
+    <filter>
+        <filter-name>requestFilter</filter-name>
+        <filter-class>com.example.demo.filter.RequestFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>requestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
