@@ -8,8 +8,8 @@ import com.example.demo.exception.DaoException;
 import com.example.demo.exception.ServiceException;
 import com.example.demo.service.UserService;
 import com.example.demo.service.impl.UserServiceImpl;
-import dao.impl.OrderDaoImpl;
-import dao.impl.UserDaoImpl;
+import com.example.demo.dao.impl.OrderDaoImpl;
+import com.example.demo.dao.impl.UserDaoImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

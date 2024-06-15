@@ -1,9 +1,9 @@
-package dao.impl;
+package com.example.demo.dao.impl;
 
+import com.example.demo.dao.OrderDao;
 import com.example.demo.entity.Order;
 import com.example.demo.exception.DaoException;
 import com.example.demo.pool.ConnectionPool;
-import dao.OrderDao;
 
 import java.sql.*;
 import java.util.ArrayList;

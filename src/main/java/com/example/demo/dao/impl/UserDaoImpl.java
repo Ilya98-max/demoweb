@@ -1,10 +1,10 @@
-package dao.impl;
+package com.example.demo.dao.impl;
 
 import com.example.demo.entity.User;
 import com.example.demo.exception.DaoException;
 import com.example.demo.pool.ConnectionPool;
-import dao.BaseDao;
-import dao.UserDao;
+import com.example.demo.dao.BaseDao;
+import com.example.demo.dao.UserDao;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;

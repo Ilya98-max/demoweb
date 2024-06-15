@@ -4,8 +4,8 @@ import com.example.demo.entity.User;
 import com.example.demo.exception.DaoException;
 import com.example.demo.exception.ServiceException;
 import com.example.demo.service.UserService;
-import dao.UserDao;
-import dao.impl.UserDaoImpl;
+import com.example.demo.dao.UserDao;
+import com.example.demo.dao.impl.UserDaoImpl;
 
 import java.util.List;
 
