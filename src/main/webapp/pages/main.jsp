@@ -96,6 +96,15 @@
         }
     </style>
     <script>
+
+        var userName = '<%= session.getAttribute("login") %>';
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('user-greeting').innerText = 'Welcome, ' + userName + '!';
+        });
+
+
         function redirectToOrderPage() {
             window.location.href = 'order-page.jsp';
         }
@@ -106,6 +115,7 @@
     <div class="header-content">
         <h1>The Best Coffee in Town</h1>
         <p>Fresh and Delicious Pastries</p>
+        <p id="user-greeting"></p>
     </div>
 </div>
 <div class="container">
@@ -126,4 +136,3 @@
 </div>
 </body>
 </html>
-

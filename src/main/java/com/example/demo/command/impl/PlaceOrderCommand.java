@@ -29,7 +29,7 @@ public class PlaceOrderCommand implements Command {
             return "order_unready.jsp?language=" + language;
         }
 
-        // Parse quantities
+
         int coffeeQuantity;
         int dessertQuantity;
         try {
@@ -43,6 +43,7 @@ public class PlaceOrderCommand implements Command {
 
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("user_id");
+        String userName = (String) session.getAttribute("login");
 
         if (userId == null) {
 
@@ -50,7 +51,7 @@ public class PlaceOrderCommand implements Command {
         }
 
 
-        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId);
+        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId, userName);
 
 
         OrderService orderService = OrderServiceImpl.getInstance();

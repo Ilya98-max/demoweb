@@ -8,18 +8,21 @@ public class Order {
     private int coffeeQuantity;
     private String dessertType;
     private int dessertQuantity;
-    private Integer userId; // User ID associated with this order
+    private Integer userId;
+
+    private String userName;
 
     public Order() {
 
     }
 
-    public Order(String coffeeType, int coffeeQuantity, String dessertType, int dessertQuantity, Integer userId) {
+    public Order(String coffeeType, int coffeeQuantity, String dessertType, int dessertQuantity, Integer userId, String userName) {
         this.coffeeType = coffeeType;
         this.coffeeQuantity = coffeeQuantity;
         this.dessertType = dessertType;
         this.dessertQuantity = dessertQuantity;
         this.userId = userId;
+        this.userName = userName;
     }
 
     public String getCoffeeType() {
@@ -62,6 +65,10 @@ public class Order {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,12 +78,13 @@ public class Order {
                 dessertQuantity == order.dessertQuantity &&
                 Objects.equals(coffeeType, order.coffeeType) &&
                 Objects.equals(dessertType, order.dessertType) &&
-                Objects.equals(userId, order.userId);
+                Objects.equals(userId, order.userId) &&
+                Objects.equals(userName,order.userName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId);
+        return Objects.hash(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId,userName);
     }
 
     @Override
@@ -87,6 +95,7 @@ public class Order {
                 ", dessertType='" + dessertType + '\'' +
                 ", dessertQuantity=" + dessertQuantity +
                 ", userId=" + userId +
+                ", userName=" + userName +
                 '}';
     }
 }

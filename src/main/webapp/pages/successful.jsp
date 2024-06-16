@@ -96,6 +96,15 @@
         }
     </style>
     <script>
+
+        var userName = '<%= session.getAttribute("login") %>';
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('user-greeting').innerText = 'Welcome, ' + userName + '!';
+        });
+
+
         function redirectToOrderPage() {
             window.location.href = 'order-page.jsp';
         }
@@ -106,12 +115,13 @@
     <div class="header-content">
         <h1>The Best Coffee in Town</h1>
         <p>Fresh and Delicious Pastries</p>
+        <p id="user-greeting"></p>
     </div>
 </div>
 <div class="container">
     <div class="content">
         <button class="menu-btn" onclick="redirectToOrderPage()">Menu Page</button>
-        <form action="db-servlet" style="display:inline;">
+        <form action="db-servlet" method="post" style="display:inline;">
             <input type="hidden" name="command" value="logout"/>
             <input type="submit" class="logout-btn" value="Logout"/>
         </form>
@@ -126,3 +136,4 @@
 </div>
 </body>
 </html>
+

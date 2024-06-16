@@ -29,12 +29,14 @@ public class LoginCommand implements Command {
         String page;
         HttpSession session = request.getSession();
         session.setAttribute("user_id", null);
+        session.setAttribute("login", null);
         try {
             request.getSession().removeAttribute("login_msg");
             if (userService.authenticate(login, password)) {
 
                 Integer userId = userService.getUserIdByLogin(login);
                 session.setAttribute("user_id", userId);
+                session.setAttribute("login", login);
 
                 if (userService.isAdmin(login)) {
 

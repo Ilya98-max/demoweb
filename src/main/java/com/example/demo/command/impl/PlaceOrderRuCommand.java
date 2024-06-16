@@ -44,6 +44,7 @@ public class PlaceOrderRuCommand implements Command {
 
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("user_id");
+        String userName = (String) session.getAttribute("login");
 
         if (userId == null) {
 
@@ -51,7 +52,7 @@ public class PlaceOrderRuCommand implements Command {
         }
 
 
-        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId);
+        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId, userName);
 
 
         OrderService orderService = OrderServiceImpl.getInstance();

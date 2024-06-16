@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     //todo
     @Override
-    public boolean add(User user){
+    public boolean add(User user) {
         UserDaoImpl userDao = UserDaoImpl.getInstance();
         boolean added = userDao.insert(user);
         return added;

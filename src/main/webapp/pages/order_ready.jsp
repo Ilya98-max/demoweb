@@ -7,42 +7,35 @@
     <title><fmt:message key="order.page.title"/></title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Georgia', serif;
+            background-color: #3e2723;
             margin: 0;
             padding: 0;
-            background-color: #fdf5e6;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            color: #efebe9;
         }
-        .container {
+        .message-container {
             text-align: center;
-            max-width: 800px;
-            padding: 20px;
-            margin: auto;
-        }
-        .message {
-            background-color: #8d6e63;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-        }
-        .message h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        .message p {
+            max-width: 80%;
             font-size: 24px;
             line-height: 1.6;
-            color: #fff;
-            margin-bottom: 15px;
+            background-color: #5d4037;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        }
+        .message-container h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #efebe9;
         }
         .actions-info {
             margin-top: 20px;
             font-size: 18px;
-            color: #fff;
+            color: #efebe9;
         }
         .actions-info p {
             margin-bottom: 10px;
@@ -56,12 +49,27 @@
             margin-bottom: 10px;
         }
         .actions-info ul li a {
-            color: #ff9800;
+            color: #ffe0b2;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .actions-info ul li a:hover {
-            color: #fb8c00;
+            color: #ffcc80;
+        }
+        .go-back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ffe0b2;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 1px solid #ffe0b2;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .go-back-link:hover {
+            background-color: #ffe0b2;
+            color: #3e2723;
         }
     </style>
 </head>
@@ -84,5 +92,6 @@
         </div>
     </div>
 </div>
+<a href="order-page.jsp" class="go-back-link"><fmt:message key="order.page.button" bundle="${language eq 'ru' ? ru : en}"/></a>
 </body>
 </html>

@@ -94,8 +94,26 @@
         .theme-switch:hover {
             background-color: #8d6e63;
         }
+        .username-box {
+            position: fixed;
+            top: 10px; /* Updated to move to top */
+            left: 10px;
+            background-color: #6f4e37;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
     </style>
     <script>
+        var userName = '<%= session.getAttribute("login") %>';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var userNameElement = document.createElement('div');
+            userNameElement.className = 'username-box';
+            userNameElement.textContent = userName;
+            document.body.appendChild(userNameElement);
+        });
+
         function submitForm() {
             document.getElementById('languageForm').submit();
         }
@@ -141,7 +159,6 @@
         </ul>
     </div>
     <div class="order-form">
-        <button class="theme-switch" onclick="toggleTheme()">Toggle Theme</button>
         <form id="languageForm" action="" method="GET">
             <select id="language" name="language" onchange="submitForm()">
                 <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
@@ -166,3 +183,4 @@
 </div>
 </body>
 </html>
+

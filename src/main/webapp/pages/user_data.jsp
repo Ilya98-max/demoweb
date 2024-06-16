@@ -92,6 +92,7 @@
 <table>
     <thead>
     <tr>
+        <th>User Name</th>
         <th>Coffee Type</th>
         <th>Coffee Quantity</th>
         <th>Dessert Type</th>
@@ -104,6 +105,7 @@
     %>
     <c:forEach var="order" items="${orders}">
         <tr>
+            <td>${order.userName}</td>
             <td>${order.coffeeType}</td>
             <td>${order.coffeeQuantity}</td>
             <td>${order.dessertType}</td>

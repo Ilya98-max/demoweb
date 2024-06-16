@@ -52,6 +52,7 @@ public class AddUserCommand implements Command {
                 throw new RuntimeException(e);
             }
             request.getSession().setAttribute("user_id", userId);
+            request.getSession().setAttribute("login", lastName);
             return "pages/successful.jsp";
         } else {
             return "pages/account.jsp";
