@@ -1,3 +1,6 @@
+<%@ page import="com.example.demo.entity.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.demo.entity.Order" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -70,6 +73,9 @@
     </tr>
     </thead>
     <tbody>
+    <%
+        List<User> users = (List<User>) session.getAttribute("users");
+    %>
     <c:forEach var="user" items="${users}">
         <tr>
             <td>${user.phoneNumber}</td>
@@ -93,6 +99,9 @@
     </tr>
     </thead>
     <tbody>
+    <%
+        List<Order> orders = (List<Order>) session.getAttribute("orders");
+    %>
     <c:forEach var="order" items="${orders}">
         <tr>
             <td>${order.coffeeType}</td>
@@ -105,7 +114,7 @@
 </table>
 
 <p style="text-align: center;">
-    <a href="index.jsp">Go back to homepage</a>
+    <a href="../index.jsp">Go back to homepage</a>
 </p>
 
 </body>

@@ -22,7 +22,7 @@ public class DeleteAccountCommand implements Command {
         if (!deleted) {
             return "pages/unsuccessful.jsp";
         } else {
-            return "/index.jsp";
+            return "../index.jsp";
         }
     }
 }

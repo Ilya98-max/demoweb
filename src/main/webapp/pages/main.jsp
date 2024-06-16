@@ -97,7 +97,7 @@
     </style>
     <script>
         function redirectToOrderPage() {
-            window.location.href = 'pages/order-page.jsp';
+            window.location.href = 'order-page.jsp';
         }
     </script>
 </head>
@@ -111,7 +111,7 @@
 <div class="container">
     <div class="content">
         <button class="menu-btn" onclick="redirectToOrderPage()">Menu Page</button>
-        <form action="db-servlet" style="display:inline;">
+        <form action="db-servlet" method="post" style="display:inline;">
             <input type="hidden" name="command" value="logout"/>
             <input type="submit" class="logout-btn" value="Logout"/>
         </form>

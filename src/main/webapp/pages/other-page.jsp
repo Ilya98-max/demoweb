@@ -49,10 +49,13 @@
 </head>
 <body>
 <div class="content">
-    <p>${login_msg}</p>
-    <form action="db-servlet">
+    <%
+        String loginMsg = (String) session.getAttribute("login_msg");
+    %>
+    <p><%= loginMsg %></p>
+    <form action="db-servlet" method="post">
         <input type="hidden" name="command" value="logout"/>
-        <input type="submit" value="Logout"/>
+        <input type="submit" value="Go back to homepage"/>
     </form>
 </div>
 </body>

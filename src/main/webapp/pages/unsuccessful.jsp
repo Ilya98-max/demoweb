@@ -62,7 +62,7 @@
     <p>Make sure you enter the correct username.</p>
     <p>If you continue to experience issues, please contact support.</p>
     <br>
-    <a href="index.jsp">Go back to homepage</a>
+    <a href="../index.jsp">Go back to homepage</a>
 </div>
 </body>
 </html>

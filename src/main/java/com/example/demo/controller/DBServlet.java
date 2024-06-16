@@ -21,14 +21,28 @@ public class DBServlet extends HttpServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String commandStr = request.getParameter("command");
         Command command;
         try {
             command = CommandType.define(commandStr, request.getLocale());
             String page = command.execute(request);
-            request.getRequestDispatcher(page).forward(request, response);
+
+            if (request.getMethod().equalsIgnoreCase("POST")) {
+                response.sendRedirect(page);
+            } else {
+                request.getRequestDispatcher(page).forward(request, response);
+            }
         } catch (CommandException e) {
             request.setAttribute("error_msg", e.getCause());
             request.getRequestDispatcher("/pages/error/error_500.jsp").forward(request, response);
@@ -37,10 +51,6 @@ public class DBServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
 
     public void destroy() {
         ConnectionPool.getInstance().destroyPool();
