@@ -97,7 +97,7 @@
     </style>
     <script>
         function redirectToOrderPage() {
-            window.location.href = 'pages/order-page.jsp';
+            window.location.href = 'order-page.jsp';
         }
     </script>
 </head>

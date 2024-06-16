@@ -8,8 +8,10 @@ import com.example.demo.service.OrderService;
 import com.example.demo.service.impl.OrderServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class PlaceOrderRuCommand implements Command {
+
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -19,39 +21,52 @@ public class PlaceOrderRuCommand implements Command {
         String dessertQuantityParam = request.getParameter("dessert_quantity");
         String language = request.getParameter("language");
 
-        if (coffeeQuantityParam == null || coffeeQuantityParam.isEmpty() ||
-                coffeeType == null || coffeeType.isEmpty() ||
+        // Check if any of the parameters are missing
+        if (coffeeType == null || coffeeType.isEmpty() ||
+                coffeeQuantityParam == null || coffeeQuantityParam.isEmpty() ||
                 dessertType == null || dessertType.isEmpty() ||
                 dessertQuantityParam == null || dessertQuantityParam.isEmpty()) {
-
 
             return "order_unready.jsp?language=" + language;
         }
 
+        // Parse quantities
         int coffeeQuantity;
         int dessertQuantity;
         try {
             coffeeQuantity = Integer.parseInt(coffeeQuantityParam);
             dessertQuantity = Integer.parseInt(dessertQuantityParam);
         } catch (NumberFormatException e) {
+
             throw new CommandException("Error parsing quantity parameters", e);
         }
 
-        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity);
+
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("user_id");
+
+        if (userId == null) {
+
+            throw new CommandException("User ID not found in session");
+        }
+
+
+        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId);
+
 
         OrderService orderService = OrderServiceImpl.getInstance();
         boolean placed;
         try {
             placed = orderService.addOrder(order);
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+
+            throw new CommandException("Failed to add order", e);
         }
 
-        if (placed) {
 
+        if (placed) {
             return "order_ready.jsp?language=" + language;
         } else {
-
             return "order_unready.jsp?language=" + language;
         }
     }

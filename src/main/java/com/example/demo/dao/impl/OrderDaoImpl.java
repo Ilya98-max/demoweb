@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
-    private static final String INSERT_ORDER = "INSERT INTO orders (coffee_type, coffee_quantity, dessert_type, dessert_quantity) VALUES (?, ?, ?, ?)";
 
-    private static final String SELECT_ALL_ORDERS = "SELECT coffee_type, coffee_quantity, dessert_type, dessert_quantity  FROM orders";
 
+    private static final String INSERT_ORDER = "INSERT INTO orders (coffee_type, coffee_quantity, dessert_type, dessert_quantity, user_id) VALUES (?, ?, ?, ?, ?)";
+
+    private static final String SELECT_ALL_ORDERS = "SELECT coffee_type, coffee_quantity, dessert_type, dessert_quantity, user_id FROM orders";
 
     private static final OrderDaoImpl instance = new OrderDaoImpl();
 
@@ -33,11 +34,13 @@ public class OrderDaoImpl implements OrderDao {
             statement.setInt(2, order.getCoffeeQuantity());
             statement.setString(3, order.getDessertType());
             statement.setInt(4, order.getDessertQuantity());
+            statement.setInt(5, order.getUserId());
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
 
         } catch (SQLException e) {
+
             throw new DaoException("Error while inserting order", e);
         }
     }
@@ -55,14 +58,15 @@ public class OrderDaoImpl implements OrderDao {
                         resultSet.getString("coffee_type"),
                         resultSet.getInt("coffee_quantity"),
                         resultSet.getString("dessert_type"),
-                        resultSet.getInt("dessert_quantity")
+                        resultSet.getInt("dessert_quantity"),
+                        resultSet.getInt("user_id")
                 );
                 orderList.add(order);
             }
         } catch (SQLException e) {
+
             throw new DaoException("Error while finding all orders", e);
         }
         return orderList;
     }
-
 }

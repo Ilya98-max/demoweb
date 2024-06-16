@@ -8,16 +8,18 @@ public class Order {
     private int coffeeQuantity;
     private String dessertType;
     private int dessertQuantity;
+    private Integer userId; // User ID associated with this order
+
     public Order() {
 
     }
 
-
-    public Order(String coffeeType, int coffeeQuantity, String dessertType, int dessertQuantity) {
+    public Order(String coffeeType, int coffeeQuantity, String dessertType, int dessertQuantity, Integer userId) {
         this.coffeeType = coffeeType;
         this.coffeeQuantity = coffeeQuantity;
         this.dessertType = dessertType;
         this.dessertQuantity = dessertQuantity;
+        this.userId = userId;
     }
 
     public String getCoffeeType() {
@@ -52,19 +54,29 @@ public class Order {
         this.dessertQuantity = dessertQuantity;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return coffeeQuantity == order.coffeeQuantity && dessertQuantity == order.dessertQuantity && Objects.equals(coffeeType, order.coffeeType) && Objects.equals(dessertType, order.dessertType);
+        return coffeeQuantity == order.coffeeQuantity &&
+                dessertQuantity == order.dessertQuantity &&
+                Objects.equals(coffeeType, order.coffeeType) &&
+                Objects.equals(dessertType, order.dessertType) &&
+                Objects.equals(userId, order.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(coffeeType, coffeeQuantity, dessertType, dessertQuantity);
+        return Objects.hash(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId);
     }
 
     @Override
@@ -74,6 +86,7 @@ public class Order {
                 ", coffeeQuantity=" + coffeeQuantity +
                 ", dessertType='" + dessertType + '\'' +
                 ", dessertQuantity=" + dessertQuantity +
+                ", userId=" + userId +
                 '}';
     }
 }

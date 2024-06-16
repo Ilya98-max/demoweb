@@ -8,12 +8,12 @@ import com.example.demo.service.OrderService;
 import com.example.demo.service.impl.OrderServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class PlaceOrderCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-
         String coffeeType = request.getParameter("coffee_type");
         String coffeeQuantityParam = request.getParameter("coffee_quantity");
         String dessertType = request.getParameter("dessert_type");
@@ -26,11 +26,10 @@ public class PlaceOrderCommand implements Command {
                 dessertType == null || dessertType.isEmpty() ||
                 dessertQuantityParam == null || dessertQuantityParam.isEmpty()) {
 
-
             return "order_unready.jsp?language=" + language;
         }
 
-
+        // Parse quantities
         int coffeeQuantity;
         int dessertQuantity;
         try {
@@ -42,7 +41,16 @@ public class PlaceOrderCommand implements Command {
         }
 
 
-        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity);
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("user_id");
+
+        if (userId == null) {
+
+            throw new CommandException("User ID not found in session");
+        }
+
+
+        Order order = new Order(coffeeType, coffeeQuantity, dessertType, dessertQuantity, userId);
 
 
         OrderService orderService = OrderServiceImpl.getInstance();
@@ -50,7 +58,8 @@ public class PlaceOrderCommand implements Command {
         try {
             placed = orderService.addOrder(order);
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+
+            throw new CommandException("Failed to add order", e);
         }
 
 

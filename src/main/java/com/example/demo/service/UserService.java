@@ -21,6 +21,9 @@ public interface UserService {
 
      boolean changePasswordByUsername(String username, String newPassword) throws ServiceException;
 
+     Integer getUserIdByLogin(String login) throws ServiceException;
+
+
 
 }
 

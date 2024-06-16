@@ -45,6 +45,13 @@ public class AddUserCommand implements Command {
         boolean added = UserServiceImpl.getInstance().add(newUser);
 
         if (added) {
+            Integer userId = null;
+            try {
+                userId = UserServiceImpl.getInstance().getUserIdByLogin(lastName);
+            } catch (ServiceException e) {
+                throw new RuntimeException(e);
+            }
+            request.getSession().setAttribute("user_id", userId);
             return "pages/successful.jsp";
         } else {
             return "pages/account.jsp";

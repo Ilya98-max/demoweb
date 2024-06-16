@@ -15,7 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
+
+
+
 public class LoginCommand implements Command {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         String login = request.getParameter("login");
@@ -23,28 +28,20 @@ public class LoginCommand implements Command {
         UserService userService = UserServiceImpl.getInstance();
         String page;
         HttpSession session = request.getSession();
+        session.setAttribute("user_id", null);
         try {
             request.getSession().removeAttribute("login_msg");
             if (userService.authenticate(login, password)) {
-                request.setAttribute("user", login);
-                session.setAttribute("user_name", login);
+
+                Integer userId = userService.getUserIdByLogin(login);
+                session.setAttribute("user_id", userId);
+
                 if (userService.isAdmin(login)) {
-                    // Получаем всех пользователей
-                    List<User> allUsers;
-                    try {
-                        allUsers = UserDaoImpl.getInstance().findAll();
-                    } catch (DaoException e) {
-                        throw new RuntimeException(e);
-                    }
+
+                    List<User> allUsers = UserDaoImpl.getInstance().findAll();
                     request.getSession().setAttribute("users", allUsers);
 
-                    // Получаем все заказы
-                    List<Order> allOrders;
-                    try {
-                        allOrders = OrderDaoImpl.getInstance().findAll();
-                    } catch (DaoException e) {
-                        throw new RuntimeException(e);
-                    }
+                    List<Order> allOrders = OrderDaoImpl.getInstance().findAll();
                     request.getSession().setAttribute("orders", allOrders);
 
                     page = "pages/user_data.jsp";
@@ -52,11 +49,13 @@ public class LoginCommand implements Command {
                     page = "pages/main.jsp";
                 }
             } else {
+
                 request.getSession().setAttribute("login_msg", "Incorrect login or pass");
                 page = "pages/other-page.jsp";
             }
+
             session.setAttribute("current_page", page);
-        } catch (ServiceException e) {
+        } catch (ServiceException | DaoException e) {
             throw new CommandException(e);
         }
 

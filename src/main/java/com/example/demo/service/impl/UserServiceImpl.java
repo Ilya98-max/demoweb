@@ -96,6 +96,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public Integer getUserIdByLogin(String login) throws ServiceException {
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.getUserIdByLogin(login);
+        } catch (DaoException e) {
+            throw new ServiceException("Error getting user ID by login", e);
+        }
+    }
+
+
 
 
 }

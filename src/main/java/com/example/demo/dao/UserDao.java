@@ -21,6 +21,7 @@ public interface UserDao {
 
     boolean changePasswordByUsername(String username, String newPassword) throws DaoException;
 
+    Integer getUserIdByLogin(String login) throws DaoException;
 
 
 }

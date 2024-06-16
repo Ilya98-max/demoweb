@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 public class BackCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        return "/index.jsp";
+        return "../index.jsp";
     }
 }

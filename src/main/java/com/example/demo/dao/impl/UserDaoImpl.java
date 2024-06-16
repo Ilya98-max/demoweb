@@ -27,6 +27,11 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
     private static final String UPDATE_PASSWORD_BY_USERNAME = "UPDATE phone_book SET password = ? WHERE last_name = ?";
 
 
+    private static final String SELECT_USER_ID_BY_LOGIN = "SELECT user_id FROM phone_book WHERE last_name = ?";
+
+
+
+
     private static UserDaoImpl instance = new UserDaoImpl();
 
     private UserDaoImpl() {
@@ -195,6 +200,27 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
             throw new DaoException("Error changing password for username: " + username, e);
         }
     }
+    @Override
+    public Integer getUserIdByLogin(String login) throws DaoException {
+        Integer userId = null;
+
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_USER_ID_BY_LOGIN)) {
+
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                userId = resultSet.getInt("user_id");
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException("Error getting user ID by login", e);
+        }
+
+        return userId;
+    }
+
 
 
 }
