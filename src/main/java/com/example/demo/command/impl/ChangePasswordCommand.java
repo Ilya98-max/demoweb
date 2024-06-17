@@ -28,7 +28,7 @@ public class ChangePasswordCommand implements Command {
         if (!passwordChanged) {
             return "pages/password.jsp";
         } else {
-            return "/index.jsp";
+            return "index.jsp";
         }
     }
 }

@@ -9,13 +9,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class OrderDaoImpl implements OrderDao {
 
     private static final String INSERT_ORDER = "INSERT INTO orders (coffee_type, coffee_quantity, dessert_type, dessert_quantity, user_id) VALUES (?, ?, ?, ?, ?)";
 
-    private static final String SELECT_ALL_ORDERS = "SELECT o.coffee_type, o.coffee_quantity, o.dessert_type, o.dessert_quantity, o.user_id, pb.last_name " +
+    private static final String SELECT_ALL_ORDERS = "SELECT o.coffee_type, o.coffee_quantity, o.dessert_type, o.dessert_quantity, o.user_id, u.last_name " +
             "FROM orders o " +
-            "LEFT JOIN phone_book pb ON o.user_id = pb.user_id";
+            "LEFT JOIN users u ON o.user_id = u.user_id";
 
 
     private static final OrderDaoImpl instance = new OrderDaoImpl();

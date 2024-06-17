@@ -1,33 +1,47 @@
 package com.example.demo.dao.impl;
 
+import com.example.demo.dao.BaseDao;
+import com.example.demo.dao.UserDao;
 import com.example.demo.entity.User;
 import com.example.demo.exception.DaoException;
 import com.example.demo.pool.ConnectionPool;
-import com.example.demo.dao.BaseDao;
-import com.example.demo.dao.UserDao;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 public class UserDaoImpl extends BaseDao<User> implements UserDao {
-    private static final String SELECT_LOGIN_PASSWORD = "SELECT password FROM phone_book  WHERE last_name = ?";
+    private static final String SELECT_LOGIN_PASSWORD = "SELECT password FROM users  WHERE last_name = ?";
 
-    private static final String INSERT_USER = "INSERT INTO phone_book (phone_number, last_name, password,email,photo) VALUES (?, ?, ?,?,?)";
+    private static final String INSERT_USER = "INSERT INTO users (phone_number, last_name, password,email,photo) VALUES (?, ?, ?,?,?)";
 
-    private static final String SELECT_USER_BY_LAST_NAME = "SELECT phone_number, last_name, password ,email,photo FROM phone_book WHERE last_name = ?";
+    private static final String SELECT_USER_BY_LAST_NAME = "SELECT phone_number, last_name, password ,email,photo FROM users WHERE last_name = ?";
 
-    private static final String SELECT_ALL_USERS = "SELECT phone_number, last_name, password,email,photo FROM phone_book";
+    private static final String SELECT_ALL_USERS = "SELECT phone_number, last_name, password,email,photo FROM users";
 
-    private static final String SELECT_ROLE_BY_LAST_NAME = "SELECT role FROM phone_book WHERE last_name = ?";
+    private static final String SELECT_ROLE_BY_LAST_NAME = "SELECT role FROM users WHERE last_name = ?";
 
-    private static final String DELETE_BY_USERNAME = "DELETE FROM phone_book WHERE last_name = ?";
+    private static final String UPDATE_PASSWORD_BY_USERNAME = "UPDATE users SET password = ? WHERE last_name = ?";
 
-    private static final String UPDATE_PASSWORD_BY_USERNAME = "UPDATE phone_book SET password = ? WHERE last_name = ?";
+    private static final String SELECT_USER_ID_BY_LOGIN = "SELECT user_id FROM users WHERE last_name = ?";
+
+    private static final String SQL_DELETE_USERS_AND_ORDERS_BY_LAST_NAME =
+            "WITH deleted_orders AS (" +
+                    "    DELETE FROM orders" +
+                    "    WHERE user_id IN (" +
+                    "        SELECT user_id" +
+                    "        FROM users" +
+                    "        WHERE last_name = ?" +
+                    "    )" +
+                    ")" +
+                    "DELETE FROM users WHERE last_name = ?";
 
 
-    private static final String SELECT_USER_ID_BY_LOGIN = "SELECT user_id FROM phone_book WHERE last_name = ?";
+
 
 
 
@@ -176,18 +190,29 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
         boolean deleted = false;
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_BY_USERNAME)) {
+             PreparedStatement deleteStatement = connection.prepareStatement(SQL_DELETE_USERS_AND_ORDERS_BY_LAST_NAME)) {
 
-            statement.setString(1, username);
-            int rowsAffected = statement.executeUpdate();
-            deleted = rowsAffected > 0;
+            // Установка параметров для удаления
+            deleteStatement.setString(1, username);
+            deleteStatement.setString(2, username );
+
+            // Выполнение запроса на удаление
+            int rowsAffected = deleteStatement.executeUpdate();
+
+            // Проверка успешности удаления
+            if (rowsAffected > 0) {
+                deleted = true;
+            }
 
         } catch (SQLException throwables) {
-            throw new DaoException("Error deleting user by username", throwables);
+            throw new DaoException("Error deleting users and orders by last name", throwables);
         }
 
         return deleted;
     }
+
+
+
     public boolean changePasswordByUsername(String username, String hashedPassword) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PASSWORD_BY_USERNAME)) {
