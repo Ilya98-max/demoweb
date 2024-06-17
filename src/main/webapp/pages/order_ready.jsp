@@ -56,7 +56,8 @@
         .actions-info ul li a:hover {
             color: #ffcc80;
         }
-        .go-back-link {
+        .go-back-link,
+        .login-link {
             display: inline-block;
             margin-top: 20px;
             text-decoration: none;
@@ -66,8 +67,10 @@
             border: 1px solid #ffe0b2;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
+            margin-right: 10px;
         }
-        .go-back-link:hover {
+        .go-back-link:hover,
+        .login-link:hover {
             background-color: #ffe0b2;
             color: #3e2723;
         }
@@ -79,7 +82,7 @@
 <fmt:setBundle basename="prop.text" var="en"/>
 <fmt:setBundle basename="prop.text_ru" var="ru"/>
 <div class="container">
-    <div class="message">
+    <div class="message-container">
         <h2><fmt:message key="order.ready.title" bundle="${language eq 'ru' ? ru : en}"/></h2>
         <p><fmt:message key="order.ready.message1" bundle="${language eq 'ru' ? ru : en}"/></p>
         <p><fmt:message key="order.ready.message2" bundle="${language eq 'ru' ? ru : en}"/></p>
@@ -93,5 +96,6 @@
     </div>
 </div>
 <a href="order-page.jsp" class="go-back-link"><fmt:message key="order.page.button" bundle="${language eq 'ru' ? ru : en}"/></a>
+<a href="../index.jsp" class="login-link"><fmt:message key="order.page.login" bundle="${language eq 'ru' ? ru : en}"/></a>
 </body>
 </html>
