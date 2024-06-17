@@ -96,7 +96,7 @@
         }
         .username-box {
             position: fixed;
-            top: 10px; /* Updated to move to top */
+            top: 10px;
             left: 10px;
             background-color: #6f4e37;
             color: white;

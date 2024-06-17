@@ -22,9 +22,9 @@ public class AddUserCommand implements Command {
         String lastName = request.getParameter("last_name");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        byte[] photo = new byte[0];  // Initialize as empty byte array
+        byte[] photo = new byte[0];
 
-        // Retrieve photo parameter as byte array
+
         try {
             Part filePart = request.getPart("photo");
             if (filePart != null && filePart.getSize() > 0) {
@@ -38,33 +38,33 @@ public class AddUserCommand implements Command {
             throw new CommandException("Error retrieving photo from request", e);
         }
 
-        // Check if all required parameters are present
+
         if (phoneNumber == null || lastName == null || password == null || email == null ||
                 phoneNumber.isEmpty() || lastName.isEmpty() || password.isEmpty() || email.isEmpty()) {
-            return "pages/fields.jsp"; // Forward to fields.jsp for error handling
+            return "pages/fields.jsp";
         }
 
-        // Check phone number format
+
         if (phoneNumber.length() != 11 || !phoneNumber.startsWith("+")) {
-            return "/add-user-form.html"; // Forward to add-user-form.html for phone number format error
+            return "/add-user-form.html";
         }
 
         try {
-            // Check if a user with the same last name already exists
+
             if (UserServiceImpl.getInstance().getUserByLastName(lastName) != null) {
-                return "pages/Users.jsp"; // Forward to Users.jsp if user already exists
+                return "pages/Users.jsp";
             }
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
 
-        // Hash the password
+
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        // Create a new user object
-        User newUser = new User(phoneNumber, lastName, hashedPassword, email, photo);  // Include photo in User constructor
 
-        // Add the user
+        User newUser = new User(phoneNumber, lastName, hashedPassword, email, photo);
+
+
         boolean added = UserServiceImpl.getInstance().add(newUser);
 
         if (added) {
@@ -75,7 +75,7 @@ public class AddUserCommand implements Command {
                 throw new RuntimeException(e);
             }
 
-            // Set session attributes
+
             request.getSession().setAttribute("user_id", userId);
             request.getSession().setAttribute("login", lastName);
 
