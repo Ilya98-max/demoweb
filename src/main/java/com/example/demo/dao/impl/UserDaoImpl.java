@@ -14,11 +14,11 @@ import java.util.List;
 public class UserDaoImpl extends BaseDao<User> implements UserDao {
     private static final String SELECT_LOGIN_PASSWORD = "SELECT password FROM phone_book  WHERE last_name = ?";
 
-    private static final String INSERT_USER = "INSERT INTO phone_book (phone_number, last_name, password,email) VALUES (?, ?, ?,?)";
+    private static final String INSERT_USER = "INSERT INTO phone_book (phone_number, last_name, password,email,photo) VALUES (?, ?, ?,?,?)";
 
-    private static final String SELECT_USER_BY_LAST_NAME = "SELECT phone_number, last_name, password ,email FROM phone_book WHERE last_name = ?";
+    private static final String SELECT_USER_BY_LAST_NAME = "SELECT phone_number, last_name, password ,email,photo FROM phone_book WHERE last_name = ?";
 
-    private static final String SELECT_ALL_USERS = "SELECT phone_number, last_name, password,email FROM phone_book";
+    private static final String SELECT_ALL_USERS = "SELECT phone_number, last_name, password,email,photo FROM phone_book";
 
     private static final String SELECT_ROLE_BY_LAST_NAME = "SELECT role FROM phone_book WHERE last_name = ?";
 
@@ -54,7 +54,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
             // statement.setString(3, user.getPassword());
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getEmail());
-
+            statement.setBytes(5,user.getPhoto());
 
             int rowsAffected = statement.executeUpdate();
             added = rowsAffected > 0;
@@ -84,7 +84,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
                         resultSet.getString("phone_number"),
                         resultSet.getString("last_name"),
                         resultSet.getString("password"),
-                        resultSet.getString("email")
+                        resultSet.getString("email"),
+                        resultSet.getBytes("photo")
 
                 );
                 userList.add(user);
@@ -137,7 +138,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
                         resultSet.getString("phone_number"),
                         resultSet.getString("last_name"),
                         resultSet.getString("password"),
-                        resultSet.getString("email")
+                        resultSet.getString("email"),
+                        resultSet.getBytes("photo")
                 );
             }
         } catch (SQLException e) {

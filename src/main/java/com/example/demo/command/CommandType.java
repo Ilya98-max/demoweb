@@ -11,7 +11,6 @@ public enum CommandType {
     LOGOUT(new LogoutCommand()),
     BACK(new BackCommand()),
     PLACE_ORDER(new PlaceOrderCommand()),
-    UPLOAD_PHOTO(new UploadPhotoCommand()),
     PLACE_ORDER_RU(new PlaceOrderRuCommand()),
 
     DELETE_ACCOUNT(new DeleteAccountCommand()),

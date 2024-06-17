@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class User extends AbstractEntity {
@@ -7,13 +8,14 @@ public class User extends AbstractEntity {
     private String lastName;
     private String password;
     private String email;
+    private byte[] photo;
 
-
-    public User(String phoneNumber, String lastName, String password,String email) {
+    public User(String phoneNumber, String lastName, String password, String email, byte[] photo) {
         this.phoneNumber = phoneNumber;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
+        this.photo = photo;
     }
 
     public String getPhoneNumber() {
@@ -48,6 +50,14 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -55,6 +65,7 @@ public class User extends AbstractEntity {
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", photo='" + (photo != null ? "Present" : "Not present") + '\'' +
                 '}';
     }
 
@@ -63,15 +74,20 @@ public class User extends AbstractEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(lastName, user.lastName) && Objects.equals(password, user.password) && Objects.equals(email, user.email);
+        return Objects.equals(phoneNumber, user.phoneNumber) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(email, user.email) &&
+                Arrays.equals(photo, user.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(phoneNumber, lastName, password, email);
+        int result = Objects.hash(phoneNumber, lastName, password, email);
+        result = 31 * result + Arrays.hashCode(photo);
+        return result;
     }
 }
-
 
 
 
