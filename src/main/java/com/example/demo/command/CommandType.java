@@ -15,6 +15,8 @@ public enum CommandType {
 
     DELETE_ACCOUNT(new DeleteAccountCommand()),
 
+    VERIFY_CODE(new VerifyCodeCommand()),
+
     CHANGE_PASSWORD(new ChangePasswordCommand()),
     DEFAULT (new DefaultCommand());
 

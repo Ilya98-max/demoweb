@@ -24,9 +24,5 @@ public interface UserService {
      Integer getUserIdByLogin(String login) throws ServiceException;
 
 
-
-
-
-
 }
 
