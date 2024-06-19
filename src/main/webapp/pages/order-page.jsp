@@ -65,6 +65,15 @@
             box-sizing: border-box;
             font-size: 1em;
         }
+        select {
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
         input[type="submit"] {
             background-color: #6f4e37;
             color: white;
@@ -170,11 +179,23 @@
             <h2><fmt:message key="place.order.title" bundle="${language eq 'ru' ? ru : en}"/></h2>
             <input type="hidden" name="command" value="<fmt:message key='place.order.command' bundle="${language eq 'ru' ? ru : en}"/>"/>
             <label for="coffee_type"><fmt:message key="coffee.type.label" bundle="${language eq 'ru' ? ru : en}"/></label><br>
-            <input type="text" id="coffee_type" name="coffee_type" placeholder="<fmt:message key='coffee.type.placeholder' bundle="${language eq 'ru' ? ru : en}"/>"><br>
+            <select id="coffee_type" name="coffee_type">
+                <option value="latte"><fmt:message key="coffee.menu.latte" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="cappuccino"><fmt:message key="coffee.menu.cappuccino" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="cocoa"><fmt:message key="coffee.menu.cocoa" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="matcha"><fmt:message key="coffee.menu.matcha" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="raf"><fmt:message key="coffee.menu.raf" bundle="${language eq 'ru' ? ru : en}"/></option>
+            </select><br>
             <label for="coffee_quantity"><fmt:message key="coffee.quantity.label" bundle="${language eq 'ru' ? ru : en}"/></label><br>
             <input type="number" id="coffee_quantity" name="coffee_quantity" value="1" min="1" placeholder="<fmt:message key='coffee.quantity.placeholder' bundle="${language eq 'ru' ? ru : en}"/>"><br>
             <label for="dessert_type"><fmt:message key="dessert.type.label" bundle="${language eq 'ru' ? ru : en}"/></label><br>
-            <input type="text" id="dessert_type" name="dessert_type" placeholder="<fmt:message key='dessert.type.placeholder' bundle="${language eq 'ru' ? ru : en}"/>"><br>
+            <select id="dessert_type" name="dessert_type">
+                <option value="doughnuts"><fmt:message key="dessert.menu.doughnuts" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="cheesecake"><fmt:message key="dessert.menu.cheesecake" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="waffles"><fmt:message key="dessert.menu.waffles" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="brownie"><fmt:message key="dessert.menu.brownie" bundle="${language eq 'ru' ? ru : en}"/></option>
+                <option value="croissant"><fmt:message key="dessert.menu.croissant" bundle="${language eq 'ru' ? ru : en}"/></option>
+            </select><br>
             <label for="dessert_quantity"><fmt:message key="dessert.quantity.label" bundle="${language eq 'ru' ? ru : en}"/></label><br>
             <input type="number" id="dessert_quantity" name="dessert_quantity" value="1" min="1" placeholder="<fmt:message key='dessert.quantity.placeholder' bundle="${language eq 'ru' ? ru : en}"/>"><br>
             <input type="submit" name="sub" value="<fmt:message key='place.order.button' bundle="${language eq 'ru' ? ru : en}"/>">
