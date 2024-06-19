@@ -129,9 +129,9 @@
 </div>
 <custom:customTag/>
 <div class="footer">
-    <a href="#">Home</a>
-    <a href="#">About Us</a>
-    <a href="#">Contact Us</a>
+    <a href="partners.jsp">Partners</a>
+    <a href="about.jsp">About Us</a>
+    <a href="contact.jsp">Contact Us</a>
     <p>&copy; 2024 The Coffee House </p>
 </div>
 </body>
