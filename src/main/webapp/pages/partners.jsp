@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e0c6a8;
+            background-color: #f3f0e6;
             color: #4b3832;
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
             padding: 20px;
             max-width: 800px;
             margin: auto;
-            background-color: #f5f5f5;
+            background-color: #e0c6a8;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
@@ -34,9 +34,16 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
         .partner h2 {
-            color: #d2691e;
+            color: #6f4e37;
             font-size: 24px;
             margin-bottom: 10px;
+        }
+        .partner h2 a {
+            color: #d2691e;
+            text-decoration: none;
+        }
+        .partner h2 a:hover {
+            text-decoration: underline;
         }
         .partner p {
             margin: 5px 0;
