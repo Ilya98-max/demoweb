@@ -39,7 +39,7 @@
             margin-bottom: 10px;
         }
         .partner h2 a {
-            color: #d2691e;
+            color: #8b4513;
             text-decoration: none;
         }
         .partner h2 a:hover {
@@ -50,18 +50,18 @@
             font-size: 16px;
         }
         .back-link {
-            display: inline-block;
             margin-top: 20px;
+            display: block;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #6f4e37;
+            color: #efebe9;
             text-decoration: none;
-            color: #6f4e37;
-            border: 1px solid #6f4e37;
-            padding: 10px 15px;
             border-radius: 5px;
-            background-color: #fff;
+            font-weight: bold;
         }
         .back-link:hover {
-            background-color: #6f4e37;
-            color: white;
+            background-color: #5a3d2b;
         }
     </style>
 </head>
