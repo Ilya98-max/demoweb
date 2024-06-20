@@ -231,7 +231,7 @@
             <li>
                 <img src="images/croissant.jpg" alt="Croissant" />
                 <div class="description">
-                    <strong><fmt:message key="dessert.menu.croissant" bundle="${language eq 'ru' ? ru : en}"/></strong>
+                    <fmt:message key="dessert.menu.croissant" bundle="${language eq 'ru' ? ru : en}"/>
                 </div>
             </li>
         </ul>
@@ -273,6 +273,11 @@
 </div>
 </body>
 </html>
+
+
+
+
+
 
 
 
