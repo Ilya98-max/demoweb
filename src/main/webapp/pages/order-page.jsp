@@ -112,6 +112,22 @@
             padding: 5px 10px;
             border-radius: 4px;
         }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .menu ul li img {
+            width: 100px; /* Ширина изображений */
+            height: auto; /* Автоматическая высота, чтобы сохранить соотношение сторон */
+            margin-right: 10px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
     </style>
     <script>
         var userName = '<%= session.getAttribute("login") %>';
@@ -152,19 +168,49 @@
     <div class="menu">
         <h2><fmt:message key="coffee.menu.title" bundle="${language eq 'ru' ? ru : en}"/></h2>
         <ul>
-            <li><fmt:message key="coffee.menu.latte" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="coffee.menu.cappuccino" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="coffee.menu.cocoa" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="coffee.menu.matcha" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="coffee.menu.raf" bundle="${language eq 'ru' ? ru : en}"/></li>
+            <li>
+                <img src="images/latte.jpg" alt="Latte" />
+                <fmt:message key="coffee.menu.latte" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/cappuccino.jpg" alt="Cappuccino" />
+                <fmt:message key="coffee.menu.cappuccino" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/cocoa.jpg" alt="Cocoa" />
+                <fmt:message key="coffee.menu.cocoa" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/matcha.jpg" alt="Matcha" />
+                <fmt:message key="coffee.menu.matcha" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/raf.jpg" alt="Raf" />
+                <fmt:message key="coffee.menu.raf" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
         </ul>
         <h2><fmt:message key="dessert.menu.title" bundle="${language eq 'ru' ? ru : en}"/></h2>
         <ul>
-            <li><fmt:message key="dessert.menu.doughnuts" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="dessert.menu.cheesecake" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="dessert.menu.waffles" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="dessert.menu.brownie" bundle="${language eq 'ru' ? ru : en}"/></li>
-            <li><fmt:message key="dessert.menu.croissant" bundle="${language eq 'ru' ? ru : en}"/></li>
+            <li>
+                <img src="images/doughnuts.jpg" alt="Doughnuts" />
+                <fmt:message key="dessert.menu.doughnuts" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/cheesecake.jpg" alt="Cheesecake" />
+                <fmt:message key="dessert.menu.cheesecake" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/waffles.jpg" alt="Waffles" />
+                <fmt:message key="dessert.menu.waffles" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/brownie.jpg" alt="Brownie" />
+                <fmt:message key="dessert.menu.brownie" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
+            <li>
+                <img src="images/croissant.jpg" alt="Croissant" />
+                <fmt:message key="dessert.menu.croissant" bundle="${language eq 'ru' ? ru : en}"/>
+            </li>
         </ul>
     </div>
     <div class="order-form">
@@ -204,6 +250,7 @@
 </div>
 </body>
 </html>
+
 
 
 
